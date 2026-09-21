@@ -83,7 +83,7 @@ outputs:
       - lib/libamdhip64.so*
       - lib/libhiprtc.so*
       - lib/libhiprtc-builtins.so*
-      - share/doc/hip/LICENSE.txt
+      - share/doc/hip/LICENSE.md
     test:
       commands:
         - test -f $PREFIX/lib/.hipInfo
@@ -126,7 +126,7 @@ outputs:
         - {{ pin_subpackage("hip-devel", exact=True) }}
         - clang {{ llvm_major_version }}.*
         - clangxx {{ llvm_major_version }}.*
-        - llvm-tools
+        - llvm-tools {{ llvm_major_version }}.*
         - perl
         - python *
         - rocm-core {{ version }}.*
@@ -155,8 +155,9 @@ outputs:
         - test
 
   # This package provides the files and activation scripts needed to compile HIP code
-  # inside conda-build and rattler-build using {{ compiler('hip') }}.
-  - name: hip-clang_linux-64
+  # inside conda-build and rattler-build using {{ compiler('hip') }} and targeting the
+  # amd/rocm HIP platform
+  - name: hip-rocm-clang_linux-64
     requirements:
       run:
         - {{ pin_subpackage("hipcc", exact=True) }}
@@ -165,8 +166,8 @@ outputs:
         - rocm-core {{ major_minor_version }}.*
         - {{ pin_subpackage("hip-runtime-amd") }}
     files:
-      - etc/conda/activate.d/hip-clang_activate.sh
-      - etc/conda/deactivate.d/hip-clang_deactivate.sh
+      - etc/conda/activate.d/hip-rocm-clang_activate.sh
+      - etc/conda/deactivate.d/hip-rocm-clang_deactivate.sh
     test:
       commands:
         - cmake-package-check hip --targets hip::host hip::device

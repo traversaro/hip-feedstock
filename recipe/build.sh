@@ -70,7 +70,7 @@ for CHANGE in "activate" "deactivate"
 do
     mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
     cp "${RECIPE_DIR}/activate/hip_${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/hip_${CHANGE}.sh"
-    cp "${RECIPE_DIR}/activate/hip-clang_${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/hip-clang_${CHANGE}.sh"
+    cp "${RECIPE_DIR}/activate/hip-rocm-clang_${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/hip-rocm-clang_${CHANGE}.sh"
 done
 
 # register the opencl implementation
