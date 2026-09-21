@@ -20,14 +20,13 @@ source:
     folder: clr
     patches:
       - 0001-Mark-raw-strings.patch
-      - 0002-Use-major-version-for-library-VERSION.patch
 
   - url: https://github.com/ROCm/llvm-project/archive/refs/tags/rocm-{{ version }}.tar.gz
     sha256: 526b5fe23417c41acbeb2273e470887b4593f48a297a8d9c1a1aa730d556f9fb
     folder: hipcc
     patches:
-      - 0003-Fix-cmake-backward-compatibility.patch
-      - 0004-hipcc-path.diff
+      - 0002-Fix-cmake-backward-compatibility.patch
+      - 0003-hipcc-path.diff
 
 build:
   number: 0
@@ -187,7 +186,7 @@ outputs:
   - name: hip-compiler
     requirements:
       run:
-        - {{ pin_subpackage("hip-clang_linux-64", exact=True) }}
+        - {{ pin_subpackage("hip-rocm-clang_linux-64", exact=True) }}
     test:
       commands:
         - cmake-package-check hip --targets hip::host hip::device
