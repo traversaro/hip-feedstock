@@ -8,7 +8,7 @@ export HIP_CLANG_PATH=${PREFIX}/bin
 pushd hipcc/amd/hipcc
 mkdir build
 cd build
-cmake ${CMAKE_ARGS} -DCMAKE_REQUIRE_FIND_PACKAGE_ROCM=TRUE ..
+cmake ${CMAKE_ARGS} -DCMAKE_REQUIRE_FIND_PACKAGE_ROCM=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_Git=ON ..
 make VERBOSE=1 -j${CPU_COUNT}
 make install
 popd
@@ -33,6 +33,7 @@ cmake -LAH \
   -DAMD_OPENCL_INCLUDE_DIR=$SRC_DIR/clr/opencl/amdocl/ \
   -DHIP_ENABLE_ROCPROFILER_REGISTER=OFF \
   -DHIP_CLANG_PATH=$PREFIX/bin \
+  -DCMAKE_DISABLE_FIND_PACKAGE_Git=ON
   ..
 
 make VERBOSE=1 -j${CPU_COUNT}
