@@ -20,6 +20,7 @@ source:
     folder: clr
     patches:
       - 0001-Mark-raw-strings.patch
+      - 0004-hip-config-optional-tools.patch
 
   - url: https://github.com/ROCm/llvm-project/archive/refs/tags/rocm-{{ version }}.tar.gz
     sha256: 526b5fe23417c41acbeb2273e470887b4593f48a297a8d9c1a1aa730d556f9fb
@@ -111,6 +112,11 @@ outputs:
         - test -f $PREFIX/share/hip/version
         - test -f $PREFIX/lib/cmake/hip/FindHIP.cmake
         - test -f $PREFIX/include/hip/hip_common.h
+        - cmake-package-check hip --targets hip::host hip::device
+      requires:
+        - cmake-package-check
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
 
   - name: hipcc
     requirements:
