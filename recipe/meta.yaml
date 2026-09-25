@@ -74,6 +74,7 @@ outputs:
       run:
         - rocm-comgr {{ major_minor_version }}.*
         - rocr-runtime {{ major_minor_version }}.*
+        - rocm-device-libs {{ major_minor_version }}.*
     files:
       - lib/.hipInfo
       - lib/cmake/hip/hip-targets*.cmake
