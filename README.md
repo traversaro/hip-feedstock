@@ -194,6 +194,7 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@conda-forge/rocm-core](https://github.com/orgs/conda-forge/teams/rocm-core/)
 * [@isuruf](https://github.com/isuruf/)
 * [@zklaus](https://github.com/zklaus/)
 
