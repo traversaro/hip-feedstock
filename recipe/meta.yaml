@@ -71,7 +71,6 @@ outputs:
         - rocm-comgr {{ major_minor_version }}.*
         - rocr-runtime {{ major_minor_version }}.*
       run:
-        - libnuma  # to work around missing run_exports in numactl
         - rocm-comgr {{ major_minor_version }}.*
         - rocr-runtime {{ major_minor_version }}.*
     files:
@@ -210,12 +209,11 @@ outputs:
       host:
         - numactl
         - rocm-core {{ version }}.*
-        - rocm-comgr {{ version }}.*
-        - rocr-runtime {{ version }}.*
+        - rocm-comgr {{ major_minor_version }}.*
+        - rocr-runtime {{ major_minor_version }}.*
       run:
-        - {{ pin_compatible("rocm-comgr") }}
-        - {{ pin_compatible("rocr-runtime") }}
-        - libnuma
+        - rocm-comgr {{ major_minor_version }}.*
+        - rocr-runtime {{ major_minor_version }}.*
     files:
       - lib/libamdocl64.so*
       - share/doc/opencl/LICENSE.txt
@@ -249,3 +247,4 @@ extra:
   recipe-maintainers:
     - isuruf
     - zklaus
+    - conda-forge/rocm-core

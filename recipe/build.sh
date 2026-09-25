@@ -5,6 +5,9 @@ set -xeuo pipefail
 export ROCM_LIBPATCH_VERSION=${PKG_VERSION//\./0}
 export HIP_CLANG_PATH=${PREFIX}/bin
 
+# CMAKE_DISABLE_FIND_PACKAGE_Git: the build directory sits inside the feedstock
+# git checkout, so without this the CLR/hipcc CMake code picks up the feedstock's
+# commit hash and bakes it into the library and package version strings.
 pushd hipcc/amd/hipcc
 mkdir build
 cd build
