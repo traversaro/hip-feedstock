@@ -223,7 +223,7 @@ outputs:
         - rocr-runtime {{ major_minor_version }}.*
     files:
       - lib/libamdocl64.so*
-      - share/doc/opencl/LICENSE.txt
+      - share/doc/opencl/LICENSE.md
     test:
       commands:
         - test -f $PREFIX/lib/libamdocl64.so

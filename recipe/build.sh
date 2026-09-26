@@ -42,28 +42,31 @@ cmake -LAH \
 make VERBOSE=1 -j${CPU_COUNT}
 make install
 
+# Note: CLR does not build the Khronos ICD loader (BUILD_ICD is OFF), the
+# libOpenCL.so in the prefix belongs to the ocl-icd host package.
 FILES_TO_REMOVE="
-    lib/libOpenCL.so
-    lib/libOpenCL.so.1
-    lib/libOpenCL.so.1.0.0
     lib/libcltrace.so
     include/CL/cl.hpp
     include/CL/cl2.hpp
     include/prof_protocol.h
-    share/doc/opencl-asan/LICENSE.txt
+    share/doc/opencl-asan/LICENSE.md
+    share/doc/hip-asan/LICENSE.md
     bin/clinfo"
 
 DIRS_TO_REMOVE="
-    share/doc/opencl-asan"
+    share/doc/opencl-asan
+    share/doc/hip-asan"
 
+# Strict on purpose: a missing file or a non-empty directory means upstream
+# renamed or added something and this list needs updating.
 for FILE in $FILES_TO_REMOVE
 do
-  rm -f "$PREFIX/$FILE"
+  rm "$PREFIX/$FILE"
 done
 
 for DIR in $DIRS_TO_REMOVE
-do 
-  rmdir "$PREFIX/$DIR" || true
+do
+  rmdir "$PREFIX/$DIR"
 done
 
 popd
